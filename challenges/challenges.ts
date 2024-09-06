@@ -58,13 +58,31 @@ console.log(person)
 console.log("--------------")
 console.log(person2)
 
-let user: User = {
-  username: "AlExml2",
-  role: "admin"
-}
+let users: User[] = [
+  {
+    username: "AlExml2",
+    role: "admin"
+  },
+  {
+    username: "SteveRogers1824",
+    role: "member"
+  },
+  {
+    username: "Choracus",
+    role: "guest"
+  }
+]
 
 let car: {model: string, horsePower: number, year: number} = {
   model: "Ford Mustang",
   horsePower: 620,
   year: 2015
 }
+
+function getUser(username: string): User {
+  const user = users.find(user => user.username === username)
+  if (!user) throw new Error(`This username ${username} does not exist`)
+  return user
+}
+
+getUser("")

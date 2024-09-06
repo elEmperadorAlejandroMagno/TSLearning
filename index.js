@@ -32,23 +32,35 @@ function pizzaOrderComplete(orderId) {
 }
 function getPizzaDetail(identifier) {
     if (typeof identifier === "string") {
-        return menu.find(function (pizzaObj) { return pizzaObj.name.toLocaleLowerCase() === identifier.toLocaleLowerCase(); });
+        if (identifier.length == 0)
+            throw new Error("The parameter cannot be an empty string");
+        var pizzaDetail = menu.find(function (pizzaObj) { return pizzaObj.name.toLocaleLowerCase() === identifier.toLocaleLowerCase(); });
+        if (!pizzaDetail)
+            throw new Error("This pizza: ".concat(identifier, " does not exist"));
+        return pizzaDetail;
+    }
+    else if (typeof identifier === "number") {
+        var pizzaDetail = menu.find(function (pizzaObj) { return pizzaObj.id === identifier; });
+        if (!pizzaDetail)
+            throw new Error("This pizza: ".concat(identifier, " does not exist"));
+        return pizzaDetail;
     }
     else
-        return menu.find(function (pizzaObj) { return pizzaObj.id === identifier; });
+        throw new TypeError("The parameter must be either a number or a string");
 }
 addNewPizza({ id: 5, name: "Chicken", price: 12 });
 addNewPizza({ id: 6, name: "Extra cheese", price: 14 });
-// console.log("----------------")
-console.log(getPizzaDetail("chicken"));
-// placeOrder("Marguerite")
-// placeOrder("Chicken")
-// placeOrder("Pepperoni")
-// console.log("----------------")
-// pizzaOrderComplete(2)
-// console.log("----------------")
-// console.log('Menu:',menu)
-// console.log("----------------")
-// console.log('Order queue:',orderQueue)
-// console.log("----------------")
-// console.log('Cash in register: $',cashInRegister)
+console.log("----------------");
+console.log("Pizza details:", getPizzaDetail("chicken"));
+console.log("----------------");
+placeOrder("Marguerite");
+placeOrder("Chicken");
+placeOrder("Pepperoni");
+console.log("----------------");
+pizzaOrderComplete(2);
+console.log("----------------");
+console.log('Menu:', menu);
+console.log("----------------");
+console.log('Order queue:', orderQueue);
+console.log("----------------");
+console.log('Cash in register: $', cashInRegister);
