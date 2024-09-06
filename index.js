@@ -1,15 +1,18 @@
-var menu = [
-    { id: 1, name: "Marguerite", price: 8 },
-    { id: 2, name: "Pepperoni", price: 10 },
-    { id: 3, name: "Hawaiian", price: 10 },
-    { id: 4, name: "Veggie", price: 9 }
-];
 var cashInRegister = 100;
+var nextOrderId = 1;
+var nextPizzaId = 1;
 var orderQueue = [];
+var menu = [
+    { id: nextPizzaId++, name: "Marguerite", price: 8 },
+    { id: nextPizzaId++, name: "Pepperoni", price: 10 },
+    { id: nextPizzaId++, name: "Hawaiian", price: 10 },
+    { id: nextPizzaId++, name: "Veggie", price: 9 }
+];
 function addNewPizza(pizzaObj) {
+    pizzaObj.id = nextPizzaId++;
     menu.push(pizzaObj);
 }
-var nextOrderId = 1;
+//! type: Order | undefined  // if we expect to return undefined values and we have not manage errors in our code
 function placeOrder(pizzaName) {
     var selectedPizza = menu.find(function (pizzaObj) { return pizzaObj.name === pizzaName; });
     if (!selectedPizza)
@@ -48,19 +51,28 @@ function getPizzaDetail(identifier) {
     else
         throw new TypeError("The parameter must be either a number or a string");
 }
-addNewPizza({ id: 5, name: "Chicken", price: 12 });
-addNewPizza({ id: 6, name: "Extra cheese", price: 14 });
-console.log("----------------");
-console.log("Pizza details:", getPizzaDetail("chicken"));
-console.log("----------------");
-placeOrder("Marguerite");
-placeOrder("Chicken");
-placeOrder("Pepperoni");
-console.log("----------------");
-pizzaOrderComplete(2);
+function updatePizza(id, updates) {
+    var updatedPizza = menu.find(function (pizzaObj) { return pizzaObj.id == id; });
+    if (!updatedPizza)
+        throw new Error("Cannot find the pizza");
+    Object.assign(updatedPizza, updates);
+    return updatedPizza;
+}
+addNewPizza({ name: "Chicken", price: 12 });
+addNewPizza({ name: "Extra cheese", price: 14 });
+// console.log("----------------")
+// console.log("Pizza details:", getPizzaDetail("chicken"))
+// console.log("----------------")
+// placeOrder("Marguerite")
+// placeOrder("Chicken")
+// placeOrder("Pepperoni")
+// console.log("----------------")
+// pizzaOrderComplete(2)
+// pizzaOrderComplete(3)
+updatePizza(2, { price: 9 });
 console.log("----------------");
 console.log('Menu:', menu);
 console.log("----------------");
-console.log('Order queue:', orderQueue);
-console.log("----------------");
-console.log('Cash in register: $', cashInRegister);
+// console.log('Order queue:',orderQueue)
+// console.log("----------------")
+// console.log('Cash in register: $',cashInRegister)

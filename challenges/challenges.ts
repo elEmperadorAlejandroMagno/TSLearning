@@ -14,11 +14,14 @@ type Address = {
 }
 
 type User = {
+  id: number,
   username: string,
   role: UserRole,
 }
 
 type UserRole = "guest" | "member" | "admin"
+
+type updatedUser = Partial<User>
 
 
 let person: Person = {
@@ -52,22 +55,27 @@ function returnObject(n: number): object {
 let people: Person[] = [person, person2] // Array<Person> another way to define type
 
 
-returnObject(4)
-console.log("--------------")
-console.log(person)
-console.log("--------------")
-console.log(person2)
+// returnObject(4)
+// console.log("--------------")
+// console.log(person)
+// console.log("--------------")
+// console.log(person2)
+
+let userId = 1
 
 let users: User[] = [
   {
+    id: userId++,
     username: "AlExml2",
     role: "admin"
   },
   {
+    id: userId++,
     username: "SteveRogers1824",
     role: "member"
   },
   {
+    id: userId++,
     username: "Choracus",
     role: "guest"
   }
@@ -79,10 +87,28 @@ let car: {model: string, horsePower: number, year: number} = {
   year: 2015
 }
 
+console.log(Object.values(car))
+
 function getUser(username: string): User {
   const user = users.find(user => user.username === username)
   if (!user) throw new Error(`This username ${username} does not exist`)
+
   return user
 }
 
-getUser("")
+// getUser("Choracus")
+
+function updateUser(id: number, updates: updatedUser): User {
+  let userToUpdate = users.find(user => user.id == id)
+  if (!userToUpdate) throw new Error("The user does not exist")
+  Object.assign(userToUpdate, updates)
+
+return userToUpdate
+}
+
+console.log(users)
+console.log("------------")
+updateUser(2, { role: "guest" })
+console.log("------------")
+console.log(users)
+
