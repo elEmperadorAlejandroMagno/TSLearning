@@ -1,3 +1,14 @@
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var cashInRegister = 100;
 var nextOrderId = 1;
 var nextPizzaId = 1;
@@ -9,8 +20,9 @@ var menu = [
     { id: nextPizzaId++, name: "Veggie", price: 9 }
 ];
 function addNewPizza(pizzaObj) {
-    pizzaObj.id = nextPizzaId++;
-    menu.push(pizzaObj);
+    var newPizza = __assign({ id: nextPizzaId++ }, pizzaObj);
+    menu.push(newPizza);
+    return newPizza;
 }
 //! type: Order | undefined  // if we expect to return undefined values and we have not manage errors in our code
 function placeOrder(pizzaName) {

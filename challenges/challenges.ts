@@ -93,7 +93,7 @@ function getUser(username: string): User {
   const user = users.find(user => user.username === username)
   if (!user) throw new Error(`This username ${username} does not exist`)
 
-  return user
+return user
 }
 
 // getUser("Choracus")
@@ -106,9 +106,19 @@ function updateUser(id: number, updates: updatedUser): User {
 return userToUpdate
 }
 
+function addNewUser(newUser: Omit<User, "id">): User {
+  let user = { 
+    id: userId++, 
+    ...newUser
+  }
+  users.push(user)
+
+return user
+}
+
 console.log(users)
 console.log("------------")
 updateUser(2, { role: "guest" })
 console.log("------------")
+console.log(addNewUser({username: "Lechero", role: "guest"}))
 console.log(users)
-

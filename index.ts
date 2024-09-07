@@ -1,5 +1,5 @@
 type Pizza = {
-  id?: number,
+  id: number,
   name: string,
   price: number
 }
@@ -25,9 +25,13 @@ const menu: Pizza[] = [
 ]
 
 
-function addNewPizza(pizzaObj: Pizza): void {
-  pizzaObj.id = nextPizzaId++
-  menu.push(pizzaObj)
+function addNewPizza(pizzaObj: Omit<Pizza, "id">): Pizza{
+  const newPizza = {
+    id: nextPizzaId++, 
+    ...pizzaObj
+  }
+  menu.push(newPizza)
+  return newPizza
 }
 
 //! type: Order | undefined  // if we expect to return undefined values and we have not manage errors in our code
