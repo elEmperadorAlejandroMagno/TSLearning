@@ -84,9 +84,19 @@ function addNewUser(newUser) {
     users.push(user);
     return user;
 }
-console.log(users);
-console.log("------------");
-updateUser(2, { role: "guest" });
-console.log("------------");
-console.log(addNewUser({ username: "Lechero", role: "guest" }));
-console.log(users);
+// console.log(users)
+// console.log("------------")
+// updateUser(2, { role: "guest" })
+// console.log("------------")
+// console.log(addNewUser({username: "Lechero", role: "guest"}))
+// console.log(users)
+var gameScores = [14, 21, 33, 42, 59];
+var favoriteThings = ["raindrops on roses", "whiskers on kittens", "bright copper on kettles", "warm woolen mittens"];
+var voters = [{ name: "Alice", age: 42 }, { name: "Bob", age: 23 }];
+// <> Generic can be any name
+function getLastItem(array) {
+    return array[array.length - 1];
+}
+console.log(getLastItem(gameScores));
+console.log(getLastItem(favoriteThings));
+console.log(getLastItem(voters));

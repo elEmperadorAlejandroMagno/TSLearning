@@ -10,6 +10,7 @@ type Order = {
   status: "ordered" | "completed"
 }
 
+//? Utilities type
 type updatedPizza = Partial<Pizza>
 
 let cashInRegister =  100
@@ -24,7 +25,17 @@ const menu: Pizza[] = [
   {id: nextPizzaId++, name: "Veggie", price: 9}
 ]
 
+//? Adding generic type
+// function addToArray<T>(array: T[], item: T): T[] {
+//   array.push(item)
+//   return array
+// }
 
+// console.log(addToArray<Pizza>(menu, {id: nextPizzaId++, name: "Chicken Bacon Ranch", price: 12}))
+// addToArray<Order>(orderQueue, {id: nextOrderId++, pizza: menu[2], status: 'completed'})
+
+
+//? More utilities type
 function addNewPizza(pizzaObj: Omit<Pizza, "id">): Pizza{
   const newPizza = {
     id: nextPizzaId++, 
@@ -59,6 +70,7 @@ function pizzaOrderComplete (orderId: number): Order {
 return orderCompleted
 }
 
+//? Narrowing Type
 function getPizzaDetail(identifier: string | number): Pizza {
   if (typeof identifier === "string") {
     if (identifier.length == 0) throw new Error("The parameter cannot be an empty string")
@@ -83,8 +95,8 @@ return updatedPizza
 }
 
 
-addNewPizza({ name: "Chicken", price: 12 })
-addNewPizza({ name: "Extra cheese", price: 14 })
+// addNewPizza({ name: "Chicken", price: 12 })
+// addNewPizza({ name: "Extra cheese", price: 14 })
 // console.log("----------------")
 // console.log("Pizza details:", getPizzaDetail("chicken"))
 // console.log("----------------")
@@ -94,10 +106,10 @@ addNewPizza({ name: "Extra cheese", price: 14 })
 // console.log("----------------")
 // pizzaOrderComplete(2)
 // pizzaOrderComplete(3)
-updatePizza(2, { price: 9 })
-console.log("----------------")
-console.log('Menu:',menu)
-console.log("----------------")
+// updatePizza(2, { price: 9 })
+// console.log("----------------")
+// console.log('Menu:',menu)
+// console.log("----------------")
 // console.log('Order queue:',orderQueue)
 // console.log("----------------")
 // console.log('Cash in register: $',cashInRegister)

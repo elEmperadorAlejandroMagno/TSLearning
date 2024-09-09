@@ -19,6 +19,12 @@ var menu = [
     { id: nextPizzaId++, name: "Hawaiian", price: 10 },
     { id: nextPizzaId++, name: "Veggie", price: 9 }
 ];
+function addToArray(array, item) {
+    array.push(item);
+    return array;
+}
+console.log(addToArray(menu, { id: nextPizzaId++, name: "Chicken Bacon Ranch", price: 12 }));
+addToArray(orderQueue, { id: nextOrderId++, pizza: menu[2], status: 'completed' });
 function addNewPizza(pizzaObj) {
     var newPizza = __assign({ id: nextPizzaId++ }, pizzaObj);
     menu.push(newPizza);
@@ -70,8 +76,8 @@ function updatePizza(id, updates) {
     Object.assign(updatedPizza, updates);
     return updatedPizza;
 }
-addNewPizza({ name: "Chicken", price: 12 });
-addNewPizza({ name: "Extra cheese", price: 14 });
+// addNewPizza({ name: "Chicken", price: 12 })
+// addNewPizza({ name: "Extra cheese", price: 14 })
 // console.log("----------------")
 // console.log("Pizza details:", getPizzaDetail("chicken"))
 // console.log("----------------")
@@ -81,10 +87,10 @@ addNewPizza({ name: "Extra cheese", price: 14 });
 // console.log("----------------")
 // pizzaOrderComplete(2)
 // pizzaOrderComplete(3)
-updatePizza(2, { price: 9 });
-console.log("----------------");
-console.log('Menu:', menu);
-console.log("----------------");
+// updatePizza(2, { price: 9 })
+// console.log("----------------")
+// console.log('Menu:',menu)
+// console.log("----------------")
 // console.log('Order queue:',orderQueue)
 // console.log("----------------")
 // console.log('Cash in register: $',cashInRegister)
