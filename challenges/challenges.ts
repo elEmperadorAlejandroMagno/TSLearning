@@ -1,9 +1,9 @@
 // Challenge: finish the object type definition
 
 //? INTERSECTION TYPE &
-type Person = personBasicInfo & additionalInfo
+type Person = PersonBasicInfo & AdditionalInfo
 
-type additionalInfo = {
+type AdditionalInfo = {
   isStudent: boolean,
   address?: Address
 }
@@ -25,7 +25,7 @@ type UserRole = "guest" | "member" | "admin"
 
 type updatedUser = Partial<User>
 
-type personBasicInfo = {
+type PersonBasicInfo = {
   name: string,
   age: number,
 }
@@ -134,7 +134,7 @@ const favoriteThings = ["raindrops on roses", "whiskers on kittens", "bright cop
 const voters = [{ name: "Alice", age: 42 }, {  name:"Bob", age: 23 }]
 
 
-// <> Generic can be any name
+//? <> Generic can be any name
 function getLastItem<T>(array: T[]): T {
   return array[array.length - 1]
 }
@@ -156,3 +156,31 @@ const addressTwitch: AddressLiving = {
   planet: 'Venus',
   city: 'Barcelona'
 }
+
+//? define a type from the return value of a function
+
+function createPlanet() {
+  return {
+    planet: 'Jupiter',
+    color: 'light brown'
+  }
+}
+
+type PlanetInfo = ReturnType<typeof createPlanet>
+
+//? TUPLES 
+
+type CellValue = "X" | "" | "O"
+
+type GameBoard = [
+  [CellValue, CellValue, CellValue],
+  [CellValue, CellValue, CellValue],
+  [CellValue, CellValue, CellValue]
+
+]
+
+const gameBoard = [
+  ["X", "X", ""],
+  ["O", "X", ""],
+  ["O", "O", "X"]
+]
