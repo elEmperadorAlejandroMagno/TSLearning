@@ -1,8 +1,9 @@
 // Challenge: finish the object type definition
 
-type Person = {
-  name: string,
-  age: number,
+//? INTERSECTION TYPE &
+type Person = personBasicInfo & additionalInfo
+
+type additionalInfo = {
   isStudent: boolean,
   address?: Address
 }
@@ -19,10 +20,15 @@ type User = {
   role: UserRole,
 }
 
+//? UNION TYPE |
 type UserRole = "guest" | "member" | "admin"
 
 type updatedUser = Partial<User>
 
+type personBasicInfo = {
+  name: string,
+  age: number,
+}
 
 let person: Person = {
   name: "Jose",
@@ -136,3 +142,17 @@ function getLastItem<T>(array: T[]): T {
 console.log(getLastItem(gameScores))
 console.log(getLastItem(favoriteThings))
 console.log(getLastItem(voters))
+
+
+//? Define a type from a value with typeof
+const address = {
+  planet: 'Mart',
+  city: 'Madrid'
+}
+
+type AddressLiving = typeof address
+
+const addressTwitch: AddressLiving = {
+  planet: 'Venus',
+  city: 'Barcelona'
+}
